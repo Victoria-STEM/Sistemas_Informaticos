@@ -101,9 +101,12 @@ Para eliminar un grupo:
 (sudo) groupdel nombre_grupo
 ```
 
-Para cambiar el nombre de un grupo sin modificar su GID:
+Para cambiar el nombre, GID o usuarios de un grupo:
 ```bash
-(sudo) groupmod -n nuevo_nombre antiguo_nombre
+(sudo) groupmod -n nuevo_nombre antiguo_nombre # Cambia el nombre del grupo.
+(sudo) groupmod -g nuevo_GID nombre_grupo # Modifica el GID del grupo.
+(sudo) groupmod -A nombre_usuario nombre_grupo # Añade uno o más usuarios al grupo.
+(sudo) groupmod -R nombre_usuario nombre_grupo # Elimina uno o más usuarios del grupo.
 ```
 
 Para listar los grupo secundarios a los que pertenece un usuario:
@@ -172,6 +175,7 @@ Para bloquear o desbloquear la cuenta de un usuario:
 (sudo) passwd -l nombre_usuario # en el archivo /etc/shadow el sistema agregará un signo ! al inicio del hash de la contraseña, lo que impide que el usuario pueda autenticarse. 
 (sudo) passwd -u nombre_usuario # desbloquea la cuenta del usuario.
 (sudo) passwd -d nombre_usuario # para eliminar la contrasena de un usuario.
+(sudo) passwd -e nombre_usuario # la contrasena expira inmediatamente.
 (sudo) chage -E XXXX-XX-XX nombre_usuario # para inhabilitar una cuenta de un usuario en un momento concreto
 ```
 
