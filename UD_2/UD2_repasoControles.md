@@ -181,23 +181,24 @@ ps -C nombre_proceso # muestra solo los procesos que hayamos nombrado.
 ps -ejH # muestra la jearquía de procesos en forma de arbol con sus relaciones.
 ps -f # muestra una salida detallada (formato extendido)
 ps -ef | grep nombre_comando # muestra todo los procesos del sistema de forma detallada que contengan el nombre del comando solicitado
-ps -o pid,state,cmd | grep nomber_comando # para observar
+ps -o pid,state,cmd | grep nomber_comando # para observar un comando en concreto
+ps -o pid,nice,cmd | grep nomber_comando # para observar el nice de un comando en concreto.
 ps -u root | wc -l # sirve para listar los procesos de un usuario concreto, restando una línea por el encabezado.
 ```
 
 Tipos de procesos: 
 
-1. Running (R): se encuentra actualmente en ejecución o está listo para ejecutarse. 
+1. **Running (R)**: se encuentra actualmente en ejecución o está listo para ejecutarse. 
 
-2. Sleeping (S): se encuentra inactivo, esperando un evento o recurso.
+2. **Sleeping (S)**: se encuentra inactivo, esperando un evento o recurso.
 Se divide en dos subtipos:
 - Uninterruptible Sleep (D): El proceso no puede ser interrumpido por señales. 
 - Interruptible Sleep (S): El proceso puede ser despertado por una señal.
 Indicación en ps: Se muestra como S (Interruptible Sleep) o D (Uninterruptible Sleep).
 
-3. Stopped (T): el proceso ha sido detenido por una señal, generalmente por intervención del usuario (Ctrl + Z) o por el comando kill -STOP [PID]. Un proceso detenido no consume recursos del sistema, pero sigue existiendo en la tabla de procesos.
+3. **Stopped (T)**: el proceso ha sido detenido por una señal, generalmente por intervención del usuario (Ctrl + Z) o por el comando kill -STOP [PID]. Un proceso detenido no consume recursos del sistema, pero sigue existiendo en la tabla de procesos.
 
-4. Zombie (Z): ha terminado su ejecución, pero su descriptor aún está en la tabla de procesos porque su proceso padre no ha leído su estado de salida (esto ocurre cuando el proceso padre no ha ejecutado la llamada wait()). Los procesos zombie no consumen recursos, pero ocupan un lugar en la tabla de procesos, lo que puede indicar un problema de diseño del proceso padre.
+4. **Zombie (Z)**: ha terminado su ejecución, pero su descriptor aún está en la tabla de procesos porque su proceso padre no ha leído su estado de salida (esto ocurre cuando el proceso padre no ha ejecutado la llamada wait()). Los procesos zombie no consumen recursos, pero ocupan un lugar en la tabla de procesos, lo que puede indicar un problema de diseño del proceso padre.
 Ejemplo: Un proceso hijo que finaliza y su proceso padre no captura su estado de salida.
 
 
@@ -216,7 +217,7 @@ jobs -p # muestra una lista de solo el PID de los trabajos en segundo plano.
 
 Para reanudar un trabajo detenido y ejecutarlo en segundo plano:
 ```bash
-bg numero_trabajo # si se omite el numero, la terminal reanuda el ultimo trabajo detenido.
+bg %numero_trabajo # si se omite el numero, la terminal reanuda el ultimo trabajo detenido.
 bg %2 # reanuda el trabajo numero 2, % se usa para hacer referencia a un trabajo.
 ```
 
@@ -267,8 +268,8 @@ nice -n 15 tar -czf archivo.tar.gz /home # Inicia el comando tar con una baja pr
 
 Para cambiar la prioridad de un proceso en ejecucion:
 ```bash
-renice valor PID
-renice -5 1234 # cambia la prioridad del proceso 1234 a -5 un valor alto.
+renice valor PID # cambia la prioridad del proceso al nuevo valor.
+renice -5 1234 # ejemplo!.
 ```
 
 Para ejecutar un proceso en segundo plano:
@@ -281,20 +282,26 @@ sleep 60 & # inicia sleep que se ejecutará durante 60 segundos en segundo plano
 
 Para programar un mensaje o una tarea periódica:
 ```bash
-crontab -l # para listar las tareas cron existentes
-crontab -r # para eliminar todas las tareas cron para el usuario actual
 crontab -e # para abrir el archivo crontab
 # dentro del archivo crontab
-* * * * * nombre_comando # los 5 * asteriscos definen la periodicidad 
-0 17 * * 0 df -h > /var/log/espacio_en_disco.log # ">" sirve para redirigir el comando. 
+* * * * * nombre_comando # los 5 * asteriscos definen la periodicidad, es decir:
+[minuto] [hora] [día_del_mes] [mes] [día_de_la_semana] nombre_comando 
+0 17 * * 0 df -h > /var/log/espacio_en_disco.log # ">" sirve para redirigir el comando.
+0/10 * * * * nombre_comando # indica que el comando debe realizarse cada 10 minutos. 
 ```
-[minuto] [hora] [día_del_mes] [mes] [día_de_la_semana] [comando]
-minuto: Rango de 0-59.
-hora: Rango de 0-23.
-día_del_mes: Rango de 1-31.
-mes: Rango de 1-12 o nombres abreviados (jan, feb, mar, etc.).
-día_de_la_semana: Rango de 0-7 (0 y 7 representan el domingo) o nombres abreviados (sun, mon, etc.).
-comando: El comando o script que se desea ejecutar.
+Desglose sintáctico: 
+- minuto: Rango de 0-59.
+- hora: Rango de 0-23.
+- día_del_mes: Rango de 1-31.
+- mes: Rango de 1-12 o nombres abreviados (jan, feb, mar, etc.).
+- día_de_la_semana: Rango de 0-7 (0 y 7 representan el domingo) o nombres abreviados (sun, mon, etc.).
+- comando: El comando o script que se desea ejecutar.
+
+Para listar las tareas programadas o eliminarlas:
+```bash
+crontab -l # para listar las tareas cron existentes
+crontab -r # para eliminar todas las tareas cron para el usuario actual
+```
 
 
 ## Programación de Tareas Puntuales 
@@ -302,30 +309,30 @@ comando: El comando o script que se desea ejecutar.
 Para programar tareas puntuales hay diferentes maneras:
 ```bash
 comandos | at hora opciones
-echo "hola mundo" | at 10:00
+echo "hola mundo" | at 10:00 # ejemplo!
 ```
 1. 10:00: A las 10:00 a.m.
 2. now + 2 hours: Dentro de 2 horas a partir del momento actual.
 3. midnight: Medianoche.
 4. noon: Mediodía.
 
-Otra forma de ejecutar tareas puntuales con at es:
+Otra forma de ejecutar tareas puntuales con **at** es:
 ```bash
 at midnight < /ruta/script.sh # programa la ejecución de script.sh a la medianoche del día actual.
 at now + 2 days < /ruta/script.sh # ejecuta el programa en 2 dias.
 ```
 
-Para gestionar las tareas at:
+Para gestionar las tareas **at**:
 ```bash
 atq # para ver la lista de tareas pendientes de ejecucion para el usuario actual.
 atrm 2 # para eliminar la tarea programada 2.
 ```
 
-Para gestonar las tareas de cron:
-etc/cron.allow y /etc/at.allow
-Contienen una lista de usuarios permitidos para usar cron o at.
-Si el archivo existe, solo los usuarios especificados pueden programar tareas.
+Para gestonar las tareas de **cron**:
+- /etc/cron.allow
+- /etc/at.allow
+Estos 2 archivos contienen una lista de usuarios permitidos para usar cron y at. Si el archivo existe, solo los usuarios especificados pueden programar tareas.
 
-/etc/cron.deny y /etc/at.deny
-Contienen una lista de usuarios denegados para usar cron o at.
-Si el archivo existe y cron.allow no está presente, se deniega el acceso a los usuarios en la lista.
+- /etc/cron.deny 
+- /etc/at.deny
+Estos 2 archivos contienen una lista de usuarios denegados para usar cron y at. Si el archivo existe y cron.allow no está presente, se deniega el acceso a los usuarios en la lista.
