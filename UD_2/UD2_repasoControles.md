@@ -176,6 +176,7 @@ Para bloquear o desbloquear la cuenta de un usuario:
 (sudo) passwd -u nombre_usuario # desbloquea la cuenta del usuario.
 (sudo) passwd -d nombre_usuario # para eliminar la contrasena de un usuario.
 (sudo) passwd -e nombre_usuario # la contrasena expira inmediatamente.
+(sudo) chage -l nombre_usuario # muestra la informacion de caducidad de una cuenta.
 (sudo) chage -E XXXX-XX-XX nombre_usuario # para inhabilitar una cuenta de un usuario en un momento concreto
 ```
 
