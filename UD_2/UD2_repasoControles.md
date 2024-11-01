@@ -12,14 +12,14 @@ Para **cambiar permisos** de un archivo:
 ```bash
 chmod XXX archivo.txt
 ```
-0 = none
-1 = execute
-2 = write
-3 = write + execute
-4 = read
-5 = read + execute
-6 = read + write
-7 = read + write + execute
+- 0 = none
+- 1 = execute
+- 2 = write
+- 3 = write + execute
+- 4 = read
+- 5 = read + execute
+- 6 = read + write
+- 7 = read + write + execute
 
 Para **cambiar el propietario** de un archivo:
 ```bash
@@ -43,7 +43,7 @@ Para verificar un usuario, mostrando el UID (User ID), GID (Group ID) y todos lo
 id nombre_usuario
 ```
 
-Para verificar la creacion de un usuario con una shell predeterminada (??):
+Para verificar la creacion de un usuario con una shell predeterminada:
 ```bash
 grep nombre_usuario /etc/passwd
 ```
@@ -51,36 +51,22 @@ grep nombre_usuario /etc/passwd
 Para crear un usuario:
 ```bash
 (sudo) adduser nombre_usuario
-```
-
-Para crear un usuario con directorio de inicio personalizado:
-```bash
-(sudo) adduser --home /opt/usuarios/pedro pedro 
-```
-
-Para crear un usuario con una shell predeterminada:
-```bash
-(sudo) adduser --shell /bin/zsh nombre_usuario
-```
-
-Para verificar la creacion de un usuario con una shell predeterminada:
-```bash
-grep nombre_usuario /etc/passwd
+(sudo) adduser --home /ruta/ruta/nombre_usuario nombre_usuario # para personalizar el directorio del usuario.
+(sudo) adduser --home /opt/usuarios/pedro pedro # ejemplo!
+(sudo) adduser --shell /bin/zsh nombre_usuario # para crear una shell del nuevo usuario en /bin/zsh.
 ```
 
 Para eliminar un usuario:
 ```bash
 (sudo) deluser nombre_usuario
+(sudo) deluser --remove-home nombre_usuario # elimina el usuario y su directorio de inicio.
 ```
 
-Para eliminar el usuario con su directorio de inicio:
-```bash
-(sudo) deluser --remove-home nombre_usuario
-```
-
-Para verificar que se ha eliminado:
+Para verificar que se ha eliminado un usuario:
 ```bash
 ls /home/nombre_usuario
+id nombre_usuario
+grep nombre_usuario /etc/passwd
 ```
 
 Para cambiar el nombre de un usuario:
@@ -88,9 +74,10 @@ Para cambiar el nombre de un usuario:
 (sudo) usermod -l nombre_nuevo nombre_antiguo
 ```
 
-Para anadir un usuario a un grupo (secundario):
+Para anadir un usuario a un grupo:
 ```bash
-(sudo) usermod -aG nombre_grupo nombre_usuario
+(sudo) usermod -aG nombre_grupo nombre_usuario # grupo SECUNDARIO
+(sudo) usermod -g nombre_grupo nombre_usuario # grupo PRINCIPAL
 ```
 
 Para bloquear una cuenta de usuario. (Si luego se intenta iniciar sesion con la cuenta bloqueada deberá fallar):
@@ -101,11 +88,7 @@ Para bloquear una cuenta de usuario. (Si luego se intenta iniciar sesion con la 
 Para crear un grupo:
 ```bash
 (sudo) groupadd nombre_grupo
-```
-
-Para crear un grupo con un GID determinado:
-```bash
-(sudo) groupadd -g XXXX nombre_grupo
+(sudo) groupadd -g XXXX nombre_grupo # para crear un grupo con un GID determinado
 ```
 
 Para eliminar un grupo:
@@ -139,43 +122,38 @@ sudo apt update
 Para ejecutar un comando en nombre de un usuario:
 ```bash
 sudo -u nombre_usuario nombre_comando
-Ej: sudo -u syslog ls /var/log
+Ej: sudo -u syslog ls /var/log # ejecuta ls en nombre del usuario syslog en /var/log.
 ```
 
 Para configurar los permisos de los usuarios:
 ```bash
 sudo nano /etc/sudoers # para entrar en el archivo con los permisos
+sudo visudo # para entrar en el archivo sudoers
 nombre_usuario ALL=(ALL) NOPASSWD: /usr/sbin/systemctl restart nginx # esto se escribe en el archivo sudoers, para permitir a maria reiniciar el servicio nginx sin que se le solicite la contrasena.
 ```
+
 Para que los usuarios puedan usar un alias:
 ```bash
 sudo nano /etc/sudoers # para entrar en el archivo con los permisos
+
+# dentro del archivo sudoers:
 User_Alias ADMINS = juan, carlos, maria # para indicar qué usuarios tienen qué alias. En este caso el alias es ADMINS y contiene a los usuarios juan, carlos y maria.
 Cmnd_Alias SHUTDOWN_CMDS = /sbin/shutdown, /sbin/reboot # para indicar un alias para una serie de comandos. En este caso es para ejecutar los comandos shutdown y reboot
 ADMINS ALL=(ALL) SHUTDOWN_CMDS # aquí se indica qué alias de usuarios disponen de qué alias de comandos. ADMINS pueden ejecutar SHUTDOWN_CMDS
 ```
 
+
 ## Administracion de cuentes y contrasenas
 
-Para configurar contrasena:
+Para configurar contrasena y sus especificaciones:
 ```bash
-(sudo) nano /etc/passwd # para entrar en el archivo de las contrasenas.
+(sudo) nano /etc/pam.d/common-password # para entrar en el archivo de las contrasenas.
+
+# Dentro del archivo passwd:
 PASS_MAX_DAYS 60 # Las contraseñas deben cambiarse cada 60 días
 PASS_WARN_AGE 5 # Los usuarios recibirán una advertencia 5 días antes de que sus contraseñas caduquen.
-```
-
-Para bloquear o desbloquear la cuenta de un usuario:
-```bash
-(sudo) passwd -l nombre_usuario # en el archivo /etc/shadow el sistema agregará un signo ! al inicio del hash de la contraseña, lo que impide que el usuario pueda autenticarse. 
-(sudo) passwd -u nombre_usuario # desbloquea la cuenta del usuario.
-```
-
-Para cambiar las especificaciones de una contraseña:
-```bash
-(sudo) nano /etc/pam.d/common-password # para acceder al archivo de la contraseñas
 password requisite pam_pwquality.so retry=3 minlen=10 ucredit=-1 lcredit=-1 dcredit=-1 ocredit=-1 # para ajustar la contraseña a las espedicifaciones. 
 ```
-
 Esto exige que las contraseñas tengan al menos:
 - 10 caracteres
 - 1 letra mayúscula
@@ -183,10 +161,14 @@ Esto exige que las contraseñas tengan al menos:
 - 1 número
 - 1 carácter especial
 
-Para inhabilitar una cuenta de un usuario:
+
+Para bloquear o desbloquear la cuenta de un usuario:
 ```bash
-(sudo) chage -E XXXX-XX-XX nombre_usuario
+(sudo) passwd -l nombre_usuario # en el archivo /etc/shadow el sistema agregará un signo ! al inicio del hash de la contraseña, lo que impide que el usuario pueda autenticarse. 
+(sudo) passwd -u nombre_usuario # desbloquea la cuenta del usuario.
+(sudo) chage -E XXXX-XX-XX nombre_usuario # para inhabilitar una cuenta de un usuario en un momento concreto
 ```
+
 
 ## Gestión y monitoreo de Procesos
 
@@ -200,7 +182,24 @@ ps -ejH # muestra la jearquía de procesos en forma de arbol con sus relaciones.
 ps -f # muestra una salida detallada (formato extendido)
 ps -ef | grep nombre_comando # muestra todo los procesos del sistema de forma detallada que contengan el nombre del comando solicitado
 ps -o pid,state,cmd | grep nomber_comando # para observar
+ps -u root | wc -l # sirve para listar los procesos de un usuario concreto, restando una línea por el encabezado.
 ```
+
+Tipos de procesos: 
+
+1. Running (R): se encuentra actualmente en ejecución o está listo para ejecutarse. 
+
+2. Sleeping (S): se encuentra inactivo, esperando un evento o recurso.
+Se divide en dos subtipos:
+- Uninterruptible Sleep (D): El proceso no puede ser interrumpido por señales. 
+- Interruptible Sleep (S): El proceso puede ser despertado por una señal.
+Indicación en ps: Se muestra como S (Interruptible Sleep) o D (Uninterruptible Sleep).
+
+3. Stopped (T): el proceso ha sido detenido por una señal, generalmente por intervención del usuario (Ctrl + Z) o por el comando kill -STOP [PID]. Un proceso detenido no consume recursos del sistema, pero sigue existiendo en la tabla de procesos.
+
+4. Zombie (Z): ha terminado su ejecución, pero su descriptor aún está en la tabla de procesos porque su proceso padre no ha leído su estado de salida (esto ocurre cuando el proceso padre no ha ejecutado la llamada wait()). Los procesos zombie no consumen recursos, pero ocupan un lugar en la tabla de procesos, lo que puede indicar un problema de diseño del proceso padre.
+Ejemplo: Un proceso hijo que finaliza y su proceso padre no captura su estado de salida.
+
 
 Para detener un proceso o cancelarlo:
 ```bash
@@ -208,7 +207,7 @@ ctrl + z # para detenerlo
 ctrl + c # para cancelarlo
 ```
 
-Para mostrar la lista de los trabajos actuales en la sesión de terminal, indicando si están en primer plano, en segundo plano o detenidos:
+Para mostrar la lista de los trabajos **que se estan ejecutando** en la sesión de terminal, indicando si están en primer plano, en segundo plano o detenidos:
 ```bash
 jobs    # lista todos los trabajos actuales.
 jobs -l # muestra una lista con el PID de cada trabajo.
@@ -229,8 +228,8 @@ fg %1 # trae el trabajo 1 a primer plano.
 
 Para matar un proceso:
 ```bash
-kill -15 PID # acaba con un proceso de forma educada. Si el proceso no debe acabar entonces no lo hará.
-kill -9 PID  # cierra un proceso sí o sí. Puede ser peligroso... Solo es conveniente usarlo si -15 no funciona y es fundamental que el proceso acabe.
+kill -15 PID # acaba con un proceso de forma educada y controlada. Si el proceso no debe acabar entonces no lo hará.
+kill -9 PID  # cierra un proceso sí o sí, sin poder controlar la senal lo que puede ser peligroso... Solo es conveniente usarlo si -15 no funciona y es fundamental que el proceso acabe.
 kill -1 PID  # Indica que el proceso debe recargar su configuración. Se utiliza comúnmente para reiniciar servicios sin detenerlos.
 kill -STOP PID # detiene el proceso sin terminarlo.
 kill -CONT PID # reanuda el proceso detenido.
@@ -242,7 +241,7 @@ killall nombre_proceso # termina todos los procesos nombrados.
 **Proceso Huérfano** es un proceso cuyo padre ha finalizado o ha sido eliminado, dejando al proceso hijo sin un controlador directo. Cuando un proceso se queda huérfano, el sistema lo reasigna al proceso init (PID 1), que se convierte en su nuevo padre.
 Ejemplo: Si un proceso de usuario lanza un script y el usuario cierra la sesión, el script se convierte en un proceso huérfano.
 
-**Los daemons** son procesos de sistema que se ejecutan en segundo plano y realizan tareas de soporte, como gestionar conexiones de red, administrar bases de datos o monitorear el sistema. Los daemons generalmente se inician durante el arranque del sistema y no tienen interacción directa con el usuario.
+**Los daemons** son procesos de sistema que se ejecutan en segundo plano y realizan tareas de soporte, como gestionar conexiones de red, administrar bases de datos o monitorear el sistema. Los daemons generalmente se inician durante el arranque del sistema y no tienen interacción directa con el usuario. A diferencia de un proceso huérfano, un daemon no es creado debido a la terminación de su padre, sino que se ejecuta intencionalmente de forma independiente.
 Ejemplo: sshd (demonio del servicio SSH) o httpd (demonio del servidor web Apache).
 
 Para mostrar información en tiempo real de los procesos:
@@ -253,7 +252,7 @@ top -d 5 # cambia el intervalo de actualizacion a 5 segundos (por defecto son 3 
 htop # version una interfaz un poco más elaborada.
 htop -p $(pgrep nombre_proceso) # muestra solo los procesos nombrados.
 -------- mientras top está abierto se puede usar:
-p # para rdenar por uso de CPU.
+p # para ordenar por uso de CPU.
 m # para ordenar por uso de memoria.
 k # para terminar un proceso especificando su PID.
 r # para cambiar la prioridad de un proceso (requiere permisos de superusuario).
