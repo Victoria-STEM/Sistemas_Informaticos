@@ -105,7 +105,6 @@ Para cambiar el nombre, GID o usuarios de un grupo:
 ```bash
 (sudo) groupmod -n nuevo_nombre antiguo_nombre # Cambia el nombre del grupo.
 (sudo) groupmod -g nuevo_GID nombre_grupo # Modifica el GID del grupo.
-(sudo) groupmod -A nombre_usuario nombre_grupo # Añade uno o más usuarios al grupo.
 (sudo) groupmod -R nombre_usuario nombre_grupo # Elimina uno o más usuarios del grupo.
 ```
 
