@@ -47,6 +47,7 @@ whoami # muestra el usuario de la terminal.
 Para verificar la creacion de un usuario con una shell predeterminada:
 ```bash
 grep nombre_usuario /etc/passwd
+cat /etc/passwd # para listar TODOS LOS USUARIOS del sistema.
 ```
 
 Para crear un usuario:
