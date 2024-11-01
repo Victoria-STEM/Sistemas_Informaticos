@@ -77,8 +77,8 @@ grep nombre_usuario /etc/passwd
 Para realizar cambios en un usuario:
 ```bash
 (sudo) usermod -l nombre_nuevo nombre_antiguo # cambiar NOMBRE
-(sudo) usermod -d nueva_ruta # cambia el DIRECTORIO de inicio.
-(sudo) usermod -s nueva_shell # cambia la SHELL.
+(sudo) usermod -d nueva_ruta nombre_usuario # cambia el DIRECTORIO de inicio.
+(sudo) usermod -s nueva_shell nombre_usuario # cambia la SHELL.
 ```
 
 Para anadir un usuario a un grupo:
