@@ -117,6 +117,11 @@ Para listar los grupo secundarios a los que pertenece un usuario:
 groups nombre_usuario
 ```
 
+Para verificar la creacion de un grupo:
+```bash
+getent group nombre_grupo
+```
+
 
 ## Sudo
 
