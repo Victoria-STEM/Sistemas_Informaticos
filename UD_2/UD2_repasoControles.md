@@ -331,8 +331,8 @@ atrm 2 # para eliminar la tarea programada 2.
 Para gestonar las tareas de **cron**:
 - /etc/cron.allow
 - /etc/at.allow
-Estos 2 archivos contienen una lista de usuarios permitidos para usar cron y at. Si el archivo existe, solo los usuarios especificados pueden programar tareas.
+\n Estos 2 archivos contienen una lista de usuarios permitidos para usar cron y at. Si el archivo existe, solo los usuarios especificados pueden programar tareas.
 
 - /etc/cron.deny 
 - /etc/at.deny
-Estos 2 archivos contienen una lista de usuarios denegados para usar cron y at. Si el archivo existe y cron.allow no está presente, se deniega el acceso a los usuarios en la lista.
+\n Estos 2 archivos contienen una lista de usuarios denegados para usar cron y at. Si el archivo existe y cron.allow no está presente, se deniega el acceso a los usuarios en la lista.
