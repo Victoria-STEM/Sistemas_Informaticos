@@ -23,7 +23,8 @@ chmod XXX archivo.txt
 
 Para **cambiar el propietario** de un archivo:
 ```bash
-(sudo) chown nuevo_propietario archivo.txt 
+(sudo) chown nuevo_propietario archivo.txt
+(sudo) chown nuevo_propietario:nuevo_grupo archivo.txt # para cambiar A LA VEZ usuario y grupo.
 ```
 
 Para **cambiar el grupo** de un archivo:
@@ -32,11 +33,6 @@ Para **cambiar el grupo** de un archivo:
 ```
 
 ## Ver, crear, modificar y eliminar usuarios y grupos
-
-Para verificar un usuario creado en home:
-```bash
-ls /home/nombre_usuario
-```
 
 Para verificar un usuario, mostrando el UID (User ID), GID (Group ID) y todos los grupos a los que pertenece el usuario:
 ```bash
@@ -48,6 +44,11 @@ Para verificar la creacion de un usuario con una shell predeterminada:
 ```bash
 grep nombre_usuario /etc/passwd
 cat /etc/passwd # para listar TODOS LOS USUARIOS del sistema.
+```
+
+Para verificar un usuario creado en home:
+```bash
+ls /home/nombre_usuario
 ```
 
 Para crear un usuario:
@@ -79,17 +80,14 @@ Para realizar cambios en un usuario:
 (sudo) usermod -l nombre_nuevo nombre_antiguo # cambiar NOMBRE
 (sudo) usermod -d nueva_ruta nombre_usuario # cambia el DIRECTORIO de inicio.
 (sudo) usermod -s nueva_shell nombre_usuario # cambia la SHELL.
+(sudo) usermod -L nombre_usuario # para BLOQUEAR la cuenta de un usuario.
+(sudo) usermod -U nombre_usuario # para DESBLOQUEAR la cuenta de un usuario.
 ```
 
 Para anadir un usuario a un grupo:
 ```bash
 (sudo) usermod -aG nombre_grupo nombre_usuario # grupo SECUNDARIO
 (sudo) usermod -g nombre_grupo nombre_usuario # grupo PRINCIPAL
-```
-
-Para bloquear una cuenta de usuario. (Si luego se intenta iniciar sesion con la cuenta bloqueada deberá fallar):
-```bash
-(sudo) usermod -L nombre_usuario
 ```
 
 Para crear un grupo:
