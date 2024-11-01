@@ -41,6 +41,7 @@ ls /home/nombre_usuario
 Para verificar un usuario, mostrando el UID (User ID), GID (Group ID) y todos los grupos a los que pertenece el usuario:
 ```bash
 id nombre_usuario
+whoami # muestra el usuario de la terminal.
 ```
 
 Para verificar la creacion de un usuario con una shell predeterminada:
@@ -54,12 +55,15 @@ Para crear un usuario:
 (sudo) adduser --home /ruta/ruta/nombre_usuario nombre_usuario # para personalizar el directorio del usuario.
 (sudo) adduser --home /opt/usuarios/pedro pedro # ejemplo!
 (sudo) adduser --shell /bin/zsh nombre_usuario # para crear una shell del nuevo usuario en /bin/zsh.
+(sudo) adduser --ingroup nombre_grupo # asigna un usuario a un grupo diferente al que se le asignaria por defecto.
 ```
 
 Para eliminar un usuario:
 ```bash
 (sudo) deluser nombre_usuario
 (sudo) deluser --remove-home nombre_usuario # elimina el usuario y su directorio de inicio.
+(sudo) deluser --backup nombre_usuario # crea un archivo comprimido del usuario antes de eliminar el backup.
+(sudo) deluser --remove-all-files nombre_usuario # elimina todos los archivos del usuario del sistema.
 ```
 
 Para verificar que se ha eliminado un usuario:
@@ -69,9 +73,11 @@ id nombre_usuario
 grep nombre_usuario /etc/passwd
 ```
 
-Para cambiar el nombre de un usuario:
+Para realizar cambios en un usuario:
 ```bash
-(sudo) usermod -l nombre_nuevo nombre_antiguo
+(sudo) usermod -l nombre_nuevo nombre_antiguo # cambiar NOMBRE
+(sudo) usermod -d nueva_ruta # cambia el DIRECTORIO de inicio.
+(sudo) usermod -s nueva_shell # cambia la SHELL.
 ```
 
 Para anadir un usuario a un grupo:
@@ -331,8 +337,8 @@ atrm 2 # para eliminar la tarea programada 2.
 Para gestonar las tareas de **cron**:
 - /etc/cron.allow
 - /etc/at.allow
-\n Estos 2 archivos contienen una lista de usuarios permitidos para usar cron y at. Si el archivo existe, solo los usuarios especificados pueden programar tareas.
+Estos 2 archivos contienen una lista de usuarios permitidos para usar cron y at. Si el archivo existe, solo los usuarios especificados pueden programar tareas.
 
 - /etc/cron.deny 
 - /etc/at.deny
-\n Estos 2 archivos contienen una lista de usuarios denegados para usar cron y at. Si el archivo existe y cron.allow no está presente, se deniega el acceso a los usuarios en la lista.
+Estos 2 archivos contienen una lista de usuarios denegados para usar cron y at. Si el archivo existe y cron.allow no está presente, se deniega el acceso a los usuarios en la lista.
