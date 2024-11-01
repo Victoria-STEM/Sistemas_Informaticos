@@ -177,6 +177,7 @@ Esto exige que las contraseñas tengan al menos:
 
 Para bloquear o desbloquear la cuenta de un usuario:
 ```bash
+(sudo) passwd nombre_usuario # cambia la contrasena del usuario.
 (sudo) passwd -l nombre_usuario # en el archivo /etc/shadow el sistema agregará un signo ! al inicio del hash de la contraseña, lo que impide que el usuario pueda autenticarse. 
 (sudo) passwd -u nombre_usuario # desbloquea la cuenta del usuario.
 (sudo) passwd -d nombre_usuario # para eliminar la contrasena de un usuario.
