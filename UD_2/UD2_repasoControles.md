@@ -171,6 +171,7 @@ Para bloquear o desbloquear la cuenta de un usuario:
 ```bash
 (sudo) passwd -l nombre_usuario # en el archivo /etc/shadow el sistema agregará un signo ! al inicio del hash de la contraseña, lo que impide que el usuario pueda autenticarse. 
 (sudo) passwd -u nombre_usuario # desbloquea la cuenta del usuario.
+(sudo) passwd -d nombre_usuario # para eliminar la contrasena de un usuario.
 (sudo) chage -E XXXX-XX-XX nombre_usuario # para inhabilitar una cuenta de un usuario en un momento concreto
 ```
 
