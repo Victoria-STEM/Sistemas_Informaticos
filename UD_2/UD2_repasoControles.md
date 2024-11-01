@@ -144,14 +144,20 @@ Para que los usuarios puedan usar un alias:
 ```bash
 sudo nano /etc/sudoers # para entrar en el archivo con los permisos
 
-# dentro del archivo sudoers:
+# dentro del archivo sudoers, la estructura es:
+# usuario HOST=(USUARIO_CUENTA) COMANDO
+
 User_Alias ADMINS = juan, carlos, maria # para indicar qué usuarios tienen qué alias. En este caso el alias es ADMINS y contiene a los usuarios juan, carlos y maria.
 Cmnd_Alias SHUTDOWN_CMDS = /sbin/shutdown, /sbin/reboot # para indicar un alias para una serie de comandos. En este caso es para ejecutar los comandos shutdown y reboot
-ADMINS ALL=(ALL) SHUTDOWN_CMDS # aquí se indica qué alias de usuarios disponen de qué alias de comandos. ADMINS pueden ejecutar SHUTDOWN_CMDS
+ADMINS ALL=(ALL) SHUTDOWN_CMDS # aquí se indica qué alias de usuarios disponen de qué alias de comandos. ADMINS pueden ejecutar SHUTDOWN_CMDS.
+%nombre_grupo ALL=(ALL) ALL # permite que los usuarios del nombre_grupo puedan usar sudo.
+nombre_usuario ALL=(ALL) ALL # permita al usuario usar sudo, como si fuese root.
 ```
+EL simbolo % hace referencia a un grupo. 
 
 
-## Administracion de cuentes y contrasenas
+
+## Administracion de cuentas y contrasenas
 
 Para configurar contrasena y sus especificaciones:
 ```bash
