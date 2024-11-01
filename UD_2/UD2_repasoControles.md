@@ -103,11 +103,6 @@ Para eliminar un grupo:
 (sudo) groupdel nombre_grupo
 ```
 
-Para verificar los usuarios que pertenecen a un grupo:
-```bash
-grep nombre_grupo /etc/passwd
-```
-
 Para cambiar el nombre de un grupo sin modificar su GID:
 ```bash
 (sudo) groupmod -n nuevo_nombre antiguo_nombre
@@ -118,7 +113,7 @@ Para listar los grupo secundarios a los que pertenece un usuario:
 groups nombre_usuario
 ```
 
-Para verificar la creacion de un grupo:
+Para verificar la creacion de un grupo y **los usuarios que pertenecen a un grupo**:
 ```bash
 getent group nombre_grupo
 ```
