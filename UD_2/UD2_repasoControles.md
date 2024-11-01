@@ -184,6 +184,8 @@ Para bloquear o desbloquear la cuenta de un usuario:
 (sudo) passwd -e nombre_usuario # la contrasena expira inmediatamente.
 (sudo) chage -l nombre_usuario # muestra la informacion de caducidad de una cuenta.
 (sudo) chage -E XXXX-XX-XX nombre_usuario # para inhabilitar una cuenta de un usuario en un momento concreto
+(sudo) chage -M numero # para cambiar la contrasena cada numero de dias.
+(sudo) chage -m numero # para indicar el numero de caracteres de la contrasena.
 ```
 
 
@@ -265,7 +267,7 @@ Ejemplo: sshd (demonio del servicio SSH) o httpd (demonio del servidor web Apach
 Para mostrar información en tiempo real de los procesos:
 ```bash
 top
-top -u nomre_usuario # para mostrar los procesos de un usuario.
+top -u nomre_usuario # para mostrar los procesos de un usuario. Tambien funciona con htop.
 top -d 5 # cambia el intervalo de actualizacion a 5 segundos (por defecto son 3 segundos).
 htop # version una interfaz un poco más elaborada.
 htop -p $(pgrep nombre_proceso) # muestra solo los procesos nombrados.
@@ -279,7 +281,7 @@ r # para cambiar la prioridad de un proceso (requiere permisos de superusuario).
 Para iniciar un proceso con un valor de prioridad especifico:
 ```bash
 nice nombre_comando
-nice -n valor nombre_comando # el valor está entre -20 y 19.
+nice -n valor nombre_comando # el valor está entre -20 y 19. 19 es el más bajo, -20 el de mayor prioridad.
 nice -n 15 tar -czf archivo.tar.gz /home # Inicia el comando tar con una baja prioridad (15), permitiendo que otros procesos con mayor prioridad tengan preferencia en el uso de la CPU.
 ```
 
