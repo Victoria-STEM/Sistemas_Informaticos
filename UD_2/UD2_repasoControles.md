@@ -263,7 +263,11 @@ kill -CONT PID # reanuda el proceso detenido.
 ------
 pkill -f palabra # termina todos los procesos que contenga la palabra senalada.
 killall nombre_proceso # termina todos los procesos nombrados.
+------
 ```
+Diferencia etre kill y pkill:
+- kill: Necesita el PID del proceso. Es ideal para controlar procesos individuales y específicos.
+- pkill: Usa el nombre del proceso o patrones, aplicándose a varios procesos al mismo tiempo si tienen nombres coincidentes.
 
 **Proceso Huérfano** es un proceso cuyo padre ha finalizado o ha sido eliminado, dejando al proceso hijo sin un controlador directo. Cuando un proceso se queda huérfano, el sistema lo reasigna al proceso init (PID 1), que se convierte en su nuevo padre.
 Ejemplo: Si un proceso de usuario lanza un script y el usuario cierra la sesión, el script se convierte en un proceso huérfano.
