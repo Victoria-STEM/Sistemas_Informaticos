@@ -165,6 +165,7 @@ Para configurar contrasena y sus especificaciones:
 
 # Dentro del archivo passwd:
 PASS_MAX_DAYS 60 # Las contraseñas deben cambiarse cada 60 días
+PASS_MIN_DAYS 1 # Número mínimo de días que deben transcurrir antes de cambiar su contraseña nuevamente.
 PASS_WARN_AGE 5 # Los usuarios recibirán una advertencia 5 días antes de que sus contraseñas caduquen.
 password requisite pam_pwquality.so retry=3 minlen=10 ucredit=-1 lcredit=-1 dcredit=-1 ocredit=-1 # para ajustar la contraseña a las espedicifaciones. 
 ```
