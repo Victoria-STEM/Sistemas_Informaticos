@@ -119,6 +119,10 @@ Para actualizar la lista de paquetes de un sistema:
 ```bash
 sudo apt update
 ```
+Para abrir la terminal como sudo:
+```bash
+sudo -s
+```
 
 Para ejecutar un comando en nombre de un usuario:
 ```bash
@@ -131,6 +135,7 @@ Para configurar los permisos de los usuarios:
 ```bash
 sudo nano /etc/sudoers # para entrar en el archivo con los permisos
 sudo visudo # para entrar en el archivo sudoers
+# dentro del archivo sudoers
 nombre_usuario ALL=(ALL) NOPASSWD: /usr/sbin/systemctl restart nginx # esto se escribe en el archivo sudoers, para permitir a maria reiniciar el servicio nginx sin que se le solicite la contrasena.
 ```
 
