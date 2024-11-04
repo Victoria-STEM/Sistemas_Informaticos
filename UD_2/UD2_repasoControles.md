@@ -119,6 +119,7 @@ Para actualizar la lista de paquetes de un sistema:
 ```bash
 sudo apt update
 ```
+
 Para abrir la terminal como sudo:
 ```bash
 sudo -s
@@ -131,24 +132,22 @@ Ej: sudo -u syslog ls /var/log # ejecuta ls en nombre del usuario syslog en /var
 su - nombre_usuario # cambia al usuario especificado, accediendo a su entorno y permisos. Requiere la contraseña del usuario al que se desea cambiar.
 ```
 
-Para configurar los permisos de los usuarios:
-```bash
-sudo nano /etc/sudoers # para entrar en el archivo con los permisos
-sudo visudo # para entrar en el archivo sudoers
-# dentro del archivo sudoers
-nombre_usuario ALL=(ALL) NOPASSWD: /usr/sbin/systemctl restart nginx # esto se escribe en el archivo sudoers, para permitir a maria reiniciar el servicio nginx sin que se le solicite la contrasena.
-```
-
 Para que los usuarios puedan usar un alias:
 ```bash
 sudo nano /etc/sudoers # para entrar en el archivo con los permisos
+sudo visudo
 
 # dentro del archivo sudoers, la estructura es:
 # usuario HOST=(USUARIO_CUENTA) COMANDO
 
+Ej! maria ALL=(ALL) NOPASSWD: /usr/sbin/systemctl restart nginx # para permitir a maria reiniciar el servicio nginx sin que se le solicite la contrasena.
+# User ALias
 User_Alias ADMINS = juan, carlos, maria # para indicar qué usuarios tienen qué alias. En este caso el alias es ADMINS y contiene a los usuarios juan, carlos y maria.
+# Cmnd Alias
 Cmnd_Alias SHUTDOWN_CMDS = /sbin/shutdown, /sbin/reboot # para indicar un alias para una serie de comandos. En este caso es para ejecutar los comandos shutdown y reboot
+# User + Comns Alias
 ADMINS ALL=(ALL) SHUTDOWN_CMDS # aquí se indica qué alias de usuarios disponen de qué alias de comandos. ADMINS pueden ejecutar SHUTDOWN_CMDS.
+# Otros ejemplos:
 %nombre_grupo ALL=(ALL) ALL # permite que los usuarios del nombre_grupo puedan usar sudo.
 nombre_usuario ALL=(ALL) ALL # permita al usuario usar sudo, como si fuese root.
 ```
