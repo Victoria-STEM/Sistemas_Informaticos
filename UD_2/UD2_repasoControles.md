@@ -341,6 +341,7 @@ echo "hola mundo" | at 10:00 # ejemplo!
 2. now + 2 hours: Dentro de 2 horas a partir del momento actual.
 3. midnight: Medianoche.
 4. noon: Mediodía.
+5. tomorrow: manana
 
 Otra forma de ejecutar tareas puntuales con **at** es:
 ```bash
