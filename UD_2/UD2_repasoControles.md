@@ -36,9 +36,9 @@ Para **cambiar el grupo** de un archivo:
 
 Para verificar un usuario:
 ```bash
-id nombre_usuario # mostrando el UID (User ID), GID (Group ID) y todos los grupos a los que pertenece el usuario.
+id nombre_usuario # mostrando el UID (User ID), GID (Group ID) y todos los grupos del usuario.
 whoami # muestra el usuario de la terminal
-grep nombre_usuario /etc/passwd # Para verificar la creacion de un usuario con una shell predeterminada.
+grep nombre_usuario /etc/passwd # verifica la creacion de un usuario con una shell predeterminada.
 cat /etc/passwd # para listar TODOS LOS USUARIOS del sistema.
 ls /home/nombre_usuario # para verificar un usuario creado en home.
 ```
