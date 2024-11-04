@@ -130,6 +130,7 @@ Para ejecutar un comando en nombre de un usuario:
 ```bash
 sudo -u nombre_usuario nombre_comando
 Ej: sudo -u syslog ls /var/log # ejecuta ls en nombre del usuario syslog en /var/log.
+su - nombre_usuario # cambia al usuario especificado, accediendo a su entorno y permisos. Requiere la contraseña del usuario al que se desea cambiar.
 ```
 
 Para configurar los permisos de los usuarios:
