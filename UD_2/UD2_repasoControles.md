@@ -190,6 +190,11 @@ Para bloquear o desbloquear la cuenta de un usuario:
 (sudo) chage -m numero # para indicar el numero de caracteres de la contrasena.
 ```
 
+Para verificar la fortaleza de una contraseña:
+```bash
+echo "contraseña_segura" | pwscore
+```
+
 
 ## Gestión y monitoreo de Procesos
 
