@@ -34,21 +34,13 @@ Para **cambiar el grupo** de un archivo:
 
 ## Ver, crear, modificar y eliminar usuarios y grupos
 
-Para verificar un usuario, mostrando el UID (User ID), GID (Group ID) y todos los grupos a los que pertenece el usuario:
+Para verificar un usuario:
 ```bash
-id nombre_usuario
-whoami # muestra el usuario de la terminal.
-```
-
-Para verificar la creacion de un usuario con una shell predeterminada:
-```bash
-grep nombre_usuario /etc/passwd
+id nombre_usuario # mostrando el UID (User ID), GID (Group ID) y todos los grupos a los que pertenece el usuario.
+whoami # muestra el usuario de la terminal
+grep nombre_usuario /etc/passwd # Para verificar la creacion de un usuario con una shell predeterminada.
 cat /etc/passwd # para listar TODOS LOS USUARIOS del sistema.
-```
-
-Para verificar un usuario creado en home:
-```bash
-ls /home/nombre_usuario
+ls /home/nombre_usuario # para verificar un usuario creado en home.
 ```
 
 Para crear un usuario:
@@ -116,6 +108,7 @@ groups nombre_usuario
 Para verificar la creacion de un grupo y **los usuarios que pertenecen a un grupo**:
 ```bash
 getent group nombre_grupo
+nano /etc/group # muestra todos los grupos de los usuarios.
 ```
 
 
