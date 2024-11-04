@@ -140,7 +140,9 @@ sudo visudo
 # dentro del archivo sudoers, la estructura es:
 # usuario HOST=(USUARIO_CUENTA) COMANDO
 
-Ej! maria ALL=(ALL) NOPASSWD: /usr/sbin/systemctl restart nginx # para permitir a maria reiniciar el servicio nginx sin que se le solicite la contrasena.
+# Ejemplo:
+ maria ALL=(ALL) NOPASSWD: /usr/sbin/systemctl restart nginx # para permitir a maria reiniciar el servicio nginx sin que se le solicite la contrasena.
+carlos ALL=(ALL) /sbin/shutdown # permita a carlos reiniciar el sistema.
 # User ALias
 User_Alias ADMINS = juan, carlos, maria # para indicar qué usuarios tienen qué alias. En este caso el alias es ADMINS y contiene a los usuarios juan, carlos y maria.
 # Cmnd Alias
