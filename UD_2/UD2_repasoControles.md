@@ -109,7 +109,7 @@ groups nombre_usuario
 Para verificar la creacion de un grupo y **los usuarios que pertenecen a un grupo**:
 ```bash
 getent group nombre_grupo
-nano /etc/group # muestra todos los grupos de los usuarios.
+cat /etc/group # muestra todos los grupos de los usuarios.
 ```
 
 
