@@ -86,6 +86,7 @@ Para crear un grupo:
 ```bash
 (sudo) groupadd nombre_grupo
 (sudo) groupadd -g XXXX nombre_grupo # para crear un grupo con un GID determinado
+(sudo) groupadd -r # Crea un grupo de sistema con un GID menor a 1000. Los grupos de sistema se utilizan para servicios y aplicaciones.
 ```
 
 Para eliminar un grupo:
