@@ -13,25 +13,25 @@ Una red se define como un conjunto de dispositivos interconectados que comparten
 
 
 ## Definiciones básicas:
-1. *IP (Protocolo de Internet)* es un *identificador único* que se asigna a un dispositivo dentro de una red. 
+1. **IP (Protocolo de Internet)** es un **identificador único** que se asigna a un dispositivo dentro de una red. 
 
-2. *Una máscara de red* (o máscara de subred) es un número que define qué parte de una dirección IP corresponde a la red y qué parte identifica al host (dispositivo específico) dentro de esa red.
+2. **Una máscara de red** (o máscara de subred) es un número que define qué parte de una dirección IP corresponde a la red y qué parte identifica al host (dispositivo específico) dentro de esa red.
     - Notación decimal: 255.255.255.0
     - Notación CIDR: /24 
 
-3. Una *interfaz de red* es el punto de conexión entre un dispositivo y la red. Puede ser un hardware físico (como una tarjeta de red o un puerto Ethernet) o una interfaz virtual (como una conexión VPN o loopback).
+3. Una **interfaz de red** es el punto de conexión entre un dispositivo y la red. Puede ser un hardware físico (como una tarjeta de red o un puerto Ethernet) o una interfaz virtual (como una conexión VPN o loopback).
     - Interfaces físicas: eth0, wlan0 (en Linux), Wi-Fi, Ethernet (en Windows).
     - Interfaces virtuales: lo (loopback), tun0 (VPN).
 
 
 ### Ejemplo práctico:
-1. *Interfaz de red*:
+1. **Interfaz de red**:
     - Piensa en la interfaz como un puerto físico (como el cable Ethernet conectado a tu computadora) o virtual. Ejemplo: `eth0`, `emp0s3`, `lo`, ...
 
-2. *Dirección IP*:
+2. **Dirección IP**:
     - Es el identificador único de un dispositivo y la interfaz tiene asignada una dirección IP, como `192.168.1.100`.
 
-3. *Máscara de red*:
+3. **Máscara de red**:
     - La dirección IP, junto con la máscara de red `255.255.255.0`, indica que el dispositivo pertenece a la red 192.168.1.0/24. La red tiene 256 direcciones posibles (192.168.1.0 a 192.168.1.255).
 
 
@@ -49,7 +49,7 @@ nmcli connection show # muestra las connexiones con nmcli.
 ```
 
 ## Asignación de IP Estáticas y Dinámicas (DHCP)
-- *IP Estática*: Se asigna *manualmente* en la configuración de la interfaz.
+- **IP Estática**: Se asigna **manualmente** en la configuración de la interfaz.
 
 ```bash
 sudo ifconfig mascara_red direccion_IP netmask 255.255.255.0 # para configurar de forma especifica una IP con ifconfig.
@@ -79,7 +79,7 @@ sudo systemctl restart systemd-networkd # reiniciar la red.
 ```
 
 
-- *IP Dinámica*: Asignada *automáticamente* por un servidor DHCP.
+- **IP Dinámica**: Asignada **automáticamente** por un servidor DHCP.
 
 ```bash
 sudo dhclient enp0s3 # asigna de forma DINAMICA y TEMPORAL una IP a una interfaz concreta.
