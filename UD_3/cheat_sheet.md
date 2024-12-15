@@ -102,6 +102,11 @@ iface ens33 inet dhcp # agrega o ajusta una configuracion de red de forma perman
 
 ```bash
 ss -tuln # para listar las conexiones activas y los servicios que usan TCP/IP.
+# HTTP -> :80 (o :8080).
+# HTTPS -> :443.
+# SSH -> :22.
+# FTP -> :21.
+
 ss -t state established '( sport = :22 )' # muestra las conexiones IP activas en el puerto indicado.
 
 ping www.google.com # se puede usar con webs.
