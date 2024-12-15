@@ -92,7 +92,7 @@ nameserver 8.8.8.8 # 2. Escribir lo anterior para usar el servidor DNS de google
 
 ```bash
 sudo dhclient enp0s3 # asigna de forma DINAMICA y TEMPORAL una IP a una interfaz concreta.
-iface ens33 inet dhcp # agrega o ajusta una configuracion de red de forma permanente y asigna una IP automáticamente y no fija.
+iface [ens33] inet dhcp # agrega o ajusta una configuracion de red de forma permanente y asigna una IP automáticamente y no fija.
 ```
 
 ## Diagnóstico y Solución de Problemas de Red en Linux
