@@ -143,10 +143,23 @@ put nuevo_documento.txt # Sube el archivo.
 
 
 ## Configuración Básica de un Servidor FTP en Linux
-1. Instalación de un servicio FTP (vsftpd o proftpd).
+1. Instalación de un servicio FTP (`vsftpd` o proftpd).
 2. Configuración de usuarios y permisos.
 3. Gestión de seguridad y acceso.
 
+```bash
+# Configuración de un Servidor FTP Básico: 
+sudo apt update # (1) Actualizacion del sistema.
+sudo apt install vsftpd # (2) Instalar vsftpd.
+sudo nano /etc/vsftpd.conf # (3) Entrar en el archivo
+local_enable=YES # (4) Permitir acceso local.
+write_enable=YES # (5) Permitir escritura.
+chroot_local_user=YES # (6) Restringir a los usuarios a sus directorios de inicio. Luego guarda y cierra el archivo.
+sudo adduser ftpuser # (7) Crea el usuario.
+sudo mkdir -p /home/ftpuser/ftp_files # (8) Crea la carpeta y los archivos.
+sudo chown ftpuser:ftpuser /home/ftpuser/ftp_files # (9) Da permisos al usuario.
+sudo systemctl restart vsftpd # (10) Reinicia el sistema.
+```
 
 # Conexiones Remotas:
 
@@ -168,18 +181,6 @@ sftp user@192.168.1.100
 ls
 get documento.txt
 put nuevo_documento.txt
-
-# Configuración de un Servidor FTP Básico: 
-sudo apt update # (1) Actualizacion del sistema.
-sudo apt install vsftpd # (2) Instalar vsftpd.
-sudo nano /etc/vsftpd.conf # (3) Entrar en el archivo
-local_enable=YES # (4) Permitir acceso local.
-write_enable=YES # (5) Permitir escritura.
-chroot_local_user=YES # (6) Restringir a los usuarios a sus directorios de inicio. Luego guarda y cierra el archivo.
-sudo adduser ftpuser # (7) Crea el usuario.
-sudo mkdir -p /home/ftpuser/ftp_files # (8) Crea la carpeta y los archivos.
-sudo chown ftpuser:ftpuser /home/ftpuser/ftp_files # (9) Da permisos al usuario.
-sudo systemctl restart vsftpd # (10) Reinicia el sistema.
 
 # Configuracion de un servidor SSH:
 sudo apt install openssh-server -y # instala el servidor ssh
