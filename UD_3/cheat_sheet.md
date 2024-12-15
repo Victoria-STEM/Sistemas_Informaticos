@@ -185,7 +185,9 @@ sudo apt install openssh-server -y # instala el servidor ssh
 sudo systemctl status ssh # comprueba el estado del servicio ssh: active(running)
 sudo systemctl start ssh # activalo si no está iniciado.
 sudo systemctl enable ssh # el servicio SSH se inicia automaticamente con el sistema operativo.
-ssh [usuario]@localhost # conectarse con el sistema
+ssh-keygen -t rsa -b 2048 # creacion de clave como uno de los usuarios.
+ssh-copy-id [otroUsuario]@localhost # se copia la clave publica en el archivo del otro usuario.
+ssh [otroUsuario]@localhost # comprobacion de que puede conectarse con el sistema sin necesidad de contrasena.
 exit # salir de la conexion.
 ```
 
