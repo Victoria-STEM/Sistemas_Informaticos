@@ -135,7 +135,7 @@ rsync -avz /home/usuario/proyecto user@192.168.1.100:/home/user/destino # Sincro
 rsync -avz user@192.168.1.100:/home/user/proyecto /home/usuario/destino # Sincroniza un servidor remoto con un directorio local.
 rsync -avz --include="*.txt" --exclude="*" /home/usuario/proyecto user@192.168.1.100:/home/user/destino # Sincroniza archivos específicos.
 
-ftp 192.168.1.100 # Conexión al servidor FTP.
+ftp 192.168.1.100 ó ftp localhost # Conexión al servidor FTP.
 ls # Lista los archivos.
 get documento.txt # Desgarga el archivo.
 put nuevo_documento.txt # Sube el archivo.
@@ -177,10 +177,11 @@ Host servidor_remoto
 
 telnet www.example.com 80 # comprueba la conexion TCP con el puerto 80 (este puerto puede variar).
 
-sftp user@192.168.1.100
+sftp user@localhost
 ls
 get documento.txt
-put nuevo_documento.txt
+put nuevo_documento.txt # subir archivo.
+ls /ruta | grep archivo.txt # verificar la transferencia.
 
 # Configuracion de un servidor SSH:
 sudo apt install openssh-server -y # instala el servidor ssh
