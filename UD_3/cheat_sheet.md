@@ -73,8 +73,8 @@ sudo ip addr del 192.168.1.100/24 dev [enp0s3] # elimina la direccion IP asignad
 sudo nmcli connection add type ethernet ifname [eth0] con-name NombreConexion ipv4.addresses 192.168.2.10/24 ipv4.gateway 192.168.2.1 # crea una NUEVA conexion ethernet para eth0 que se llama NombreConexion con ip y mascara de red en nmcli y es ESTÁTICA.
 sudo nmcli connection up NombreConexion # activa la conexion.
 sudo nmcli connection down NombreConexion # desactiva la conexion.
-# Modificar existente:
 sudo nmcli connection delete NombreConexion # elimina la conexion.
+# Modificar existente:
 sudo nmcli con mod [enp0s3] ipv4.addresses 192.168.1.101/24 # MODIFICA una conexion IP que YA EXISTENTE con nmcli.
 sudo nmcli con up [enp0se] # comprobacion con nmcli
 
