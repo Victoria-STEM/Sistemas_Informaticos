@@ -184,6 +184,17 @@ sudo systemctl restart vsftpd # (10) Reinicia el sistema.
 
 # EXTRA
 
+Recordando:
+```bash
+sudo adduser usuario
+sudo usermod -aG grupo usuario
+sudo su # abrir consola como sudo
+su - usuario # abrir la consola como un usuario especifico.
+exit # salir de la consola como el usuario con la que se ha abierto.
+getent groups nombre_grupo # ver los usuarios de un grupo
+
+```
+
 Script bash que configure automáticamente la red:
 ```bash
 #!/bin/bash
