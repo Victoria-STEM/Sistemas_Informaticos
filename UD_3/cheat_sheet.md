@@ -53,7 +53,7 @@ ip route # muestra la puerta de enlace (Gateway)
 - **IP Estática**: Se asigna **manualmente** en la configuración de la interfaz.
 
 ```bash
-sudo ifconfig [mascara_red] [direccion_IP] netmask 255.255.255.0 # para configurar de forma especifica una IP con ifconfig.
+sudo ifconfig [enp0s3] [direccion_IP] netmask 255.255.255.0 # para configurar de forma especifica una IP con ifconfig.
 sudo ip route add default via 192.168.1.1 # configura una IP con una puerta de enlace (Gateway) predeterminada.
 _______
 sudo ip addr add 192.168.1.100/24 dev enp0s3 
