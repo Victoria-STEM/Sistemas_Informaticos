@@ -179,6 +179,14 @@ sudo adduser ftpuser # (7) Crea el usuario.
 sudo mkdir -p /home/ftpuser/ftp_files # (8) Crea la carpeta y los archivos.
 sudo chown ftpuser:ftpuser /home/ftpuser/ftp_files # (9) Da permisos al usuario.
 sudo systemctl restart vsftpd # (10) Reinicia el sistema.
+
+# Configuracion de un servidor SSH:
+sudo apt install openssh-server -y # instala el servidor ssh
+sudo systemctl status ssh # comprueba el estado del servicio ssh: active(running)
+sudo systemctl start ssh # activalo si no está iniciado.
+sudo systemctl enable ssh # el servicio SSH se inicia automaticamente con el sistema operativo.
+ssh [usuario]@localhost # conectarse con el sistema
+exit # salir de la conexion.
 ```
 
 
