@@ -42,7 +42,7 @@ Una red se define como un conjunto de dispositivos interconectados que comparten
 
 ```bash
 ifconfig # para mostrar las IPs.
-ifconfig enp0se # para ver la configuracion de una interfaz específica.
+ifconfig [enp0se] # para ver la configuracion de una interfaz específica.
 ip link show # para mostrar las IPs.
 ip addr show # para mostrar las direcciones IP detalladas.
 nmcli connection show # muestra las connexiones con nmcli.
@@ -56,25 +56,27 @@ ip route # muestra la puerta de enlace (Gateway)
 sudo ifconfig [mascara_red] [direccion_IP] netmask 255.255.255.0 # para configurar de forma especifica una IP con ifconfig.
 sudo ip route add default via 192.168.1.1 # configura una IP con una puerta de enlace (Gateway) predeterminada.
 _______
-sudo ip addr add 192.168.1.100/24 dev emp0s3 
+sudo ip addr add 192.168.1.100/24 dev enp0s3 
 # anade la IP 192.168.1.100 a la interfaz de red emp0s3. /24 equivale a la mascara de red 255.255.255.0 . Este cambio es TEMPORTAL porque al reiniciar el sistema se pierde la configuración.
 
-auto emp0s3
-iface emp0s3 inet static
+auto enp0s3
+iface enp0s3 inet static
     address 192.168.1.100
     netmask 255.255.255.0
     gateway 192.168.1.1
 # esto es lo mismo, pero para una configuracion PERMANENTE! Esta orden se escribe en el archivo de red >> /etc/network/interfaces donde se configura y se inicializa cada vez que se reinicie el sistema.
 _______
 
-sudo ip addr del 192.168.1.100/24 dev emp0s3 # elimina la direccion IP asignada.
+sudo ip addr del 192.168.1.100/24 dev [enp0s3] # elimina la direccion IP asignada.
 
-sudo nmcli connection add type ethernet ifname eth0 con-name NombreConexion ipv4.addresses 192.168.2.10/24 ipv4.gateway 192.168.2.1 # crea una NUEVA conexion ethernet para eth0 que se llama NombreConexion con ip y mascara de red en nmcli y es ESTÁTICA.
+# Crear nueva:
+sudo nmcli connection add type ethernet ifname [eth0] con-name NombreConexion ipv4.addresses 192.168.2.10/24 ipv4.gateway 192.168.2.1 # crea una NUEVA conexion ethernet para eth0 que se llama NombreConexion con ip y mascara de red en nmcli y es ESTÁTICA.
 sudo nmcli connection up NombreConexion # activa la conexion.
 sudo nmcli connection down NombreConexion # desactiva la conexion.
+# Modificar existente:
 sudo nmcli connection delete NombreConexion # elimina la conexion.
-sudo nmcli con mod emp0s3 ipv4.addresses 192.168.1.101/24 # MODIFICA una conexion IP que YA EXISTENTE con nmcli.
-sudo nmcli con up emp0se # comprobacion con nmcli
+sudo nmcli con mod [enp0s3] ipv4.addresses 192.168.1.101/24 # MODIFICA una conexion IP que YA EXISTENTE con nmcli.
+sudo nmcli con up [enp0se] # comprobacion con nmcli
 
 sudo systemctl restart NetworkManager # reiniciar la red
 sudo systemctl restart systemd-networkd # reiniciar la red.
