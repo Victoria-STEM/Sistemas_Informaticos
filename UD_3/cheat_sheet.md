@@ -130,6 +130,7 @@ scp /home/usuario/documento.txt user@192.168.1.100:/home/user/destino # Copia de
 scp user@192.168.1.100:/home/user/documento.txt /home/usuario/destino # Copia de archivo desde un servidor remoto.
 scp -r /home/usuario/proyecto user@192.168.1.100:/home/user/destino # Copia de un directorio completo.
 
+rsync archivo_local.txt /tmp/ # copia un archivo en el respositorio indicado.
 rsync -avz /home/usuario/proyecto user@192.168.1.100:/home/user/destino # Sincroniza un directorio local con un servidor remoto.
 rsync -avz user@192.168.1.100:/home/user/proyecto /home/usuario/destino # Sincroniza un servidor remoto con un directorio local.
 rsync -avz --include="*.txt" --exclude="*" /home/usuario/proyecto user@192.168.1.100:/home/user/destino # Sincroniza archivos específicos.
