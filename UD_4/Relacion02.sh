@@ -10,28 +10,36 @@ else
 fi
 
 # Ejercicio 02
-echo "El numero del argumento es: $1."
-
-# Ejercicio 03
-contrasena=1234
-while [ $1 -eq contrasena ]; do
-    echo "Contrasena correcta."
+numero=$1
+for ((i=1; i<=numero; i++)); do 
+    echo "El numero del argumento es: $1."
 done
 
-# Arrays
+# Ejercicio 03
+usuario=$1
+contrasena=1234
+
+while [ $usuario -ne $contrasena ]; do
+    echo "Contrasena incorrecta."
+    read -p "Vuelve a introducir la contraseña: " usuario
+done
+echo "Contraseña correcta."
+
+# ARRAYS
 # Ejercicios 01
 peliculas=("Pelicula1" "Pelicula2" "Pelicula3" "Pelicula4" "Pelicula5")
-echo "${peliculas[0]}"
-echo "${peliculas[4]}"
+echo "${peliculas[0]}" # primera posición.
+echo "${peliculas[-1]}" # ultima posición.
 
 # Ejercicio 02
 frutas=("fresas" "mandarinas" "uvas" "platanos" "kiwis")
 frutas[1]="naranjas"
+"${frutas[@]}"
 
 # Ejercicio 03
 dias_semana=("lunes" "martes" "miercoles" "jueves" "viernes" "sabado" "domingo")
 for dia in "${dias_semana[@]}"; do
-    echo "§dia"
+    echo "$dia"
 done
 
 # Ejercicio 04
@@ -40,7 +48,7 @@ apellidos=("Fernandez" "Sanchez" "Molina" "Moron")
 
 nombres_apellidos=()
 
-for i in "${!nombres[@]}"; do
-    nombres_apellidos+=("${nombres[i]}")
-    nombres_apellidos+=("${apellidos[i]}")
+for ((i=0; i <${#nombre[-1]}; i++)); do
+    nombres_apellidos[i]="${nombres[i]}" "${nombres[i]}"
 done
+echo "Nombres completos: ${nombre_apellidos[@]}"
