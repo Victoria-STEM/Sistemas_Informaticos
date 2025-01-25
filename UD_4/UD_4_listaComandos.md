@@ -71,19 +71,30 @@ fi
 ## Buble For
 El bucle **for** itera sobre una lista de elementos o un rango de números y ejecuta un conjunto de comandos para cada elemento.
 ```bash
-for i in {1..5}; do
-  echo "Número: $i"
+numero=$1
+for ((i=1; i<=numero; i++)); do
+    echo $i
 done
 ```
 
 ## Buble While
 El bucle **while** ejecuta repetidamente un bloque de código mientras una condición sea verdadera.
 ```bash
+# OPCION 1:
 contador=1
 while [ $contador -le 5 ]; do
   echo "Iteración $contador"
   ((contador++))
 done
+
+# OPCION 2:
+password=$1
+contrasenia=1234
+while [ $password -ne $contrasenia ]; do
+    echo "Contraseña incorrecta"
+    read -p "Intenta de nuevo: " password
+done
+echo "Contraseña correcta"
 ```
 
 ## Arrays
@@ -113,6 +124,7 @@ unset mi_array[2]  # Elimina "Luis"
 Longitud de un array:
 ```bash
 echo "Número de elementos: ${#mi_array[@]}"
+echo "Última película: ${peliculas[-1]}" # Ultima posicion en un array
 ```
 Iterar sobre un Array:
 ```bash
@@ -126,6 +138,17 @@ Hola, Marta
 Hola, Luis
 Hola, Ana
 Hola, Carlos
+```
+Combinacion de array:
+```bash
+#!/bin/bash
+nombres=("Juan" "María" "Pedro")
+apellidos=("Pérez" "López" "García")
+
+for ((i=0; i<${#nombres[@]}; i++)); do
+    completo[i]="${nombres[i]} ${apellidos[i]}"
+done
+echo "Nombres completos: ${completo[@]}"
 ```
 
 ## Aplicaciones Comunes de Arrays
@@ -143,4 +166,19 @@ Gestión de parámetros múltiples:
 ```bash
 argumentos=("$@")
 echo "Se pasaron los siguientes argumentos: ${argumentos[@]}"
+```
+
+Crear **random**:
+Número aleatorio en un rango específico: Si necesitas un número en un rango, usa el operador módulo (%) para limitar el valor y suma para ajustar el inicio del rango.
+
+Ejemplo: Generar un número entre 1 y 100:
+```bash
+echo $((RANDOM % 100 + 1))
+random_index=$((RANDOM % ${#items[@]})) # Generar índice aleatorio entre 0 y la longitud de la lista - 1
+```
+
+### Recuerda!
+Dale al script los permisos de ejecucion:
+```bash
+chmod +x indice_random.sh
 ```
