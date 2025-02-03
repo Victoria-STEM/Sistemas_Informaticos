@@ -3,6 +3,9 @@
 echo "Este script permite monitorear el estado del sistema."
 monitorear=true
 
+mkdir carpeta1
+mkdir carpeta2
+
     while [ "$monitorear" = true ]; do
 
         echo "a. Ver uso de CPU."
