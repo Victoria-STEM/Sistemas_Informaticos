@@ -9,7 +9,7 @@ convertir_longitud() {
 
     validar=$(validar_argumentos "$@")
     validarUnidad=$(validar_unidaded "$@")
-    validarArgumentos=$(validar_argumentos "$@")
+    validarArgumentos=$(validar_numero "$@")
 
     if [ "$validar" = "ok" ]; then # primero validamos el numero de argumentos.
 
@@ -61,7 +61,7 @@ convertir_longitud() {
 
 metros_a_kilometros() {
     cantidad=$1
-    solucion=$( cantidad / 1000 | bc -l)
+    solucion=$(cantidad / 1000)
     echo $solucion
 }
 
