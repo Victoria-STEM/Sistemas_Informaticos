@@ -11,7 +11,7 @@ concatenar_palabras() {
 
         if [ $# -ge 1 ]; then
             frase+=" - "
-            echo $#
+            # echo $#
         fi
 
     done
