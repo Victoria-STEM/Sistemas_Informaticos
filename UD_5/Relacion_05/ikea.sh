@@ -17,6 +17,12 @@ agregar_producto() {
 
     if [ ! -f "$inventario" ]; then
         touch "$inventario"
+        echo "$inventario creado"
+    fi
+
+    if [ $# -lt 2 ]; then
+        echo "Deben pasarse al menos 2 argumentos."
+        return 1
     fi
 
     echo "$1 $2" >> "$inventario"
@@ -43,6 +49,12 @@ realizar_pedido() {
 
     if [ ! -f "$pedido" ]; then
         touch "$pedido"
+        echo "Se ha creado la carpeta $pedido"
+    fi
+
+    if [ $# -lt 2 ]; then
+        echo "Deben pasarse al menos 2 argumentos."
+        return 1
     fi
 
     echo "$1 ($2 unidades)" >> "$pedido"
