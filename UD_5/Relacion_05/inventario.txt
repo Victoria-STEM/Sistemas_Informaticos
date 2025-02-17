@@ -1,0 +1,3 @@
+lack 10
+kallax 20
+MALM 10

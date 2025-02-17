@@ -22,6 +22,7 @@ archivar_albumes() {
     fi
 
     if [ ! -d "$destino" ]; then
+        echo "Se ha creado la carpeta de destino"
         mkdir -p "$destino"
     fi
 
@@ -34,5 +35,7 @@ archivar_albumes() {
     done
         
 }
+
+# --------------------------- MAIN ---------------------------
 
 archivar_albumes "$@"
