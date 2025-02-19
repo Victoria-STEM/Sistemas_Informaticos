@@ -12,7 +12,7 @@ crear_discografica() {
 
     if [ ! -d "$destino" ]; then
         mkdir discografica
-        echo "Carpeta discogrrafica creada."
+        echo "Carpeta discografica creada."
     fi
 
     while [ $# -gt 0 ]; do
