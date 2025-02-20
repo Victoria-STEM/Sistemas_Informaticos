@@ -14,30 +14,39 @@ sacar_carta() {
     echo "Total: $puntuacion"
 }
 
+comprobar_resultado() {
+
+    if [ "$puntuacion" -gt 21 ]; then 
+        echo "Upsi dusi... Te has pasado y has perdido."
+        juego=false
+    elif [ "$puntuacion" -le 21 ]; then
+        echo "¡Felicidades! No te has pasado de 21"
+    else 
+        echo "Vaya, te has pasado de 21. Has perdido."
+    fi
+}
+
+# --------------------------------- MAIN ---------------------------------
+
 puntuacion=0
-echo "Comienza el juego!"
-echo "Tu puntuacion es: $puntuacion"
 juego=true
 
+echo "Comienza el juego!"
+echo "Tu puntuacion es: $puntuacion"
+
 while [ $juego = true ]; do
+
     read -p "Introduce 'seguir' para pedir otra carta o 'quedarse' para finalizar el turno:" opcionJugador
 
     if [ "$opcionJugador" = "seguir" ]; then
+        
         sacar_carta
-
-        if [ "$puntuacion" -gt 21 ]; then 
-            echo "Upsi dusi... Te has pasado y has perdido."
-            juego=false
-        fi
+        comprobar_resultado $puntuacion
 
     elif [ "$opcionJugador" = "quedarse" ]; then
+        
         echo "Total final: $puntuacion"
-
-            if [ "$puntuacion" -le 21 ]; then
-                echo "¡Felicidades! No te has pasado de 21"
-            else 
-                echo "Vaya, te has pasado de 21. Has perdido."
-            fi
+        comprobar_resultado $puntuacion
 
         juego=false
 
