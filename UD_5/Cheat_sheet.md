@@ -51,3 +51,7 @@ lanzar_dado() {
     echo $(( RANDOM % ( $MAX - $MIN + 1) + $MIN ))
 }
 ```
+
+## ARRAYS
+
+bonos=("0. 1GB: 5€;" "1. 5GB: 15€;" "2. 10GB: 25€;")
