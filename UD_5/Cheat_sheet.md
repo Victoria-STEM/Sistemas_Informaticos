@@ -4,14 +4,15 @@ Siempre con echo "$variable" >> además, aunque sea echo no se imprime por panta
 
 ```bash
 resultadoJugador1=$(validar_argumentos "" "JUGADOR 1")
+resultado=($(funcion_que_da_un_array))
 ```
-Esta opcion guarda en una variable el resultado de una funcion a la que se le pasan los argumentos directamente. Lo que evita programas.
+Esta opcion guarda en una variable el resultado de una funcion a la que se le pasan los argumentos directamente. Lo que evita problemas.
 
 ## VALIDACIONES
 
 Numero entero:
 ```bash
-if [[ ! "$argumento" =~ ^[0-9]+$ ]]; then
+if [ ! "$argumento" =~ ^[0-9]+$ ]; then
     echo "Error. Se debe introducir un numero entero."
     return 1
 fi
