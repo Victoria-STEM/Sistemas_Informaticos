@@ -109,6 +109,7 @@ mi_array=("Juan" "María" "Luis" "Ana")
 echo ${mi_array[0]}  # Imprime "Juan"
 echo ${mi_array[2]}  # Imprime "Luis"
 echo ${mi_array[@]}  # Imprime "Juan María Luis Ana"
+echo ${mi_array[-1]} # Imprime "Ana"
 ```
 Diferencias entre @ y *:
 ```bash
