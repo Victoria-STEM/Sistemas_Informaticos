@@ -27,19 +27,7 @@ curl https://api.restful-api.dev/objects/1 # con un id especifico.
 curl https://api.restful-api.dev/objects/1
 
 # Envía un pedido al servidor (curl -X POST).
-curl -X POST
 
-curl -X POST https://api.restful-api.dev/objects/1 
-    -H "Content-Type: application/json" 
-    -d '{
-        "name":"Google Pixel 6 Pro",
-        "data":{
-            "color":"Cloudy White",
-            "capacity":"128 GB"
-        }
-    }'
-
-curl -X POST -d '{"name":"Google Pixel 6 Pro","data":{"color":"Cloudy White","capacity":"128 GB"}}' https://api.restful-api.dev/objects/1 -H "Content-Type: application/json"
 curl -X POST -d '{"name":"Google Pixel 6 Pro","data":{"color":"Cloudy White","capacity":"128 GB"}}' -H "Content-Type: application/json" https://api.restful-api.dev/objects/1
 
 # Modifica la cantidad disponible de un producto (curl -X PUT).
@@ -47,6 +35,7 @@ curl -X PUT -d '{"field":"value"}' -H "Content-Type: application/json" https://p
 
 # Elimina un producto del catálogo (curl -X DELETE).
 curl -X DELETE -d '{"field":"value"}' -H "Content-Type: application/json" https://postman-echo.com/delete
+curl -X DELETE http://api.restful-api.dev/objects/ff808181932badb60195dd997e8c59b0
 
 ## 3. Seguridad y Análisis de Respuestas HTTP
 
@@ -60,6 +49,14 @@ curl -I https://www.floristeriacaladium.es/modules/homeslider/images/6bd857f6b01
 ## 4. Pruebas de Red y Puertos
 
 # Accede de forma segura al servidor (ssh, simulado).
+sudo apt install openssh-server -y # instala el servidor ssh
+sudo systemctl status ssh # comprueba el estado del servicio ssh: active(running)
+sudo systemctl start ssh # activalo si no está iniciado.
+sudo systemctl enable ssh # el servicio SSH se inicia automaticamente con el sistema operativo.
+ssh-keygen -t rsa -b 2048 # creacion de clave como uno de los usuarios.
+ssh-copy-id [otroUsuario]@localhost # se copia la clave publica en el archivo del otro usuario.
+ssh [otroUsuario]@localhost # comprobacion de que puede conectarse con el sistema sin necesidad de contrasena.
+exit # salir de la conexion.
 
 # Verifica la configuración DNS del dominio (nslookup).
 nslookup https://www.floristeriacaladium.es/
