@@ -27,20 +27,16 @@ curl https://api.restful-api.dev/objects/1 # con un id especifico.
 curl https://api.restful-api.dev/objects/1
 
 # Envía un pedido al servidor (curl -X POST).
-
-curl -X POST -d '{"name":"Google Pixel 6 Pro","data":{"color":"Cloudy White","capacity":"128 GB"}}' -H "Content-Type: application/json" https://api.restful-api.dev/objects/1
+curl -X POST -d '{"name":"Google Pixel 6 Pro","data":{"color":"Cloudy White","capacity":"128 GB"}}' -H "Content-Type: application/json" https://api.restful-api.dev/objects
 
 # Modifica la cantidad disponible de un producto (curl -X PUT).
-curl -X PUT -d '{"field":"value"}' -H "Content-Type: application/json" https://postman-echo.com/put
+curl -X PUT -d '{"name":"Google Pixel 6 Pro","data":{"color":"Cloudy White","capacity":"300 GB"}}' -H "Content-Type: application/json" http://api.restful-api.dev/objects/ff808181932badb60195dd997e8c59b0
 
 # Elimina un producto del catálogo (curl -X DELETE).
-curl -X DELETE -d '{"field":"value"}' -H "Content-Type: application/json" https://postman-echo.com/delete
 curl -X DELETE http://api.restful-api.dev/objects/ff808181932badb60195dd997e8c59b0
 
 ## 3. Seguridad y Análisis de Respuestas HTTP
-
 # Prueba la seguridad de HTTPS (curl -I http).
-curl -I https://www.floristeriacaladium.es/modules/homeslider/images/6bd857f6b0189a6f9401c211a766e639e15e54f2_BannerTest.png
 
 # Consulta el contenido de una imagen sin descargarla (curl -I).
 curl -I https://www.floristeriacaladium.es/modules/homeslider/images/6bd857f6b0189a6f9401c211a766e639e15e54f2_BannerTest.png
@@ -59,7 +55,8 @@ ssh [otroUsuario]@localhost # comprobacion de que puede conectarse con el sistem
 exit # salir de la conexion.
 
 # Verifica la configuración DNS del dominio (nslookup).
-nslookup https://www.floristeriacaladium.es/
+sudo apt install traceroute -y
+nslookup www.floristeriacaladium.es
 
 # Evalúa la disponibilidad del servidor (traceroute).
 traceroute www.floristeriacaladium.es
